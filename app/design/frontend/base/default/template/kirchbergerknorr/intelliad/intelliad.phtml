@@ -58,6 +58,16 @@ if($this->isActive()): ?>
             }
         });
         <?php endif;?>
+        <?php if($this->isSuccess()): ?>
+            try {
+                var price = '<?php echo $this->getLastPrice(); ?>';
+                var orderId = '<?php echo $this->getLastOrderId(); ?>';
+                var currency = '<?php echo $this->getCurrency(); ?>';
+                iapixel('<?php echo $this->getCustomerId(); ?>', 'sale', price, {orderId: orderId, currency: currency});
+            } catch(e) {
+                console.log(e);
+            }
+        <?php endif;?>
     </script>
     <?php echo $this->getChildHtml(); ?>
     <!-- Kirchbergerknorr_IntelliAd Section end -->

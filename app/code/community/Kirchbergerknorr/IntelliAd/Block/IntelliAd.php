@@ -69,4 +69,18 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
     {
         return Mage::app()->getStore()->getCurrentCurrencyCode();
     }
+
+    public function getLastPrice()
+    {
+        $sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+        $oOrder = Mage::getModel('sales/order')->load($sOrderId);
+        return $oOrder->getGrandTotal();
+    }
+
+    public function getLastOrderId()
+    {
+        $sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+        $oOrder = Mage::getModel('sales/order')->load($sOrderId);
+        return $oOrder->getQuote()->getId();
+    }
 }
