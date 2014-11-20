@@ -1,0 +1,64 @@
+<?php
+/**
+ * IntelliAd Html Block
+ *
+ * @category    Kirchbergerknorr
+ * @package     Kirchbergerknorr_IntelliAd
+ * @author      Aleksey Razbakov <ar@kirchbergerknorr.de>
+ * @copyright   Copyright (c) 2014 kirchbergerknorr GmbH (http://www.kirchbergerknorr.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+
+if($this->isActive()): ?>
+    <!-- Kirchbergerknorr_IntelliAd Section start -->
+    <script type="text/javascript">
+        function iapixel(cId, cvType, cvValue, opts) {
+            if (cId && cvType && cvValue) {
+                var merge = function(d,s){ for(var p in s){ if(d.hasOwnProperty(p)){ d[p]=s[p]; } } return d; };
+                var options = merge({
+                    currency: 'EUR',
+                    orderId: '',
+                    custom1: '',
+                    custom2: '',
+                    custom3: '',
+                    custom4: ''
+                }, opts || {});
+                var varMap = {
+                    currency: 'vv', orderId: 'po',
+                    custom1: 'c1', custom2: 'c2', custom3: 'c3', custom4: 'c4'
+                };
+                var proto = (document.location.toString().indexOf('https://') != -1) ? 'https' : 'http';
+                var uri = 't23.intelliad.de/tc.php';
+                var url = '?cl='+encodeURIComponent(cId)+'&v='+encodeURIComponent(cvValue)+'&vz='+encodeURIComponent(cvType)+'&';
+                for(var v in varMap){ if(varMap.hasOwnProperty(v)){ url+= varMap[v]+'='+encodeURIComponent(options[v])+'&'; }}
+                var imgsrc = proto+'://'+uri+url+'&rand='+Math.floor(Math.random()*11111139435231);
+                var img = new Image(); img.setAttribute('width', 1); img.setAttribute('height', 1); img.src = imgsrc;
+                document.getElementsByTagName('body')[0].appendChild(img);
+            }
+            return true;
+        }
+
+        <?php if($this->isCheckout() && !$this->isSuccess() ): ?>
+        Event.observe(window, 'load', function() {
+            Checkout.prototype.reloadProgressBlock = function(toStep) {
+                try {
+                    var price = '<?php echo $this->getPrice(); ?>';
+                    var orderId = '<?php echo $this->getOrderId(); ?>';
+                    var currency = '<?php echo $this->getCurrency(); ?>';
+                    iapixel('<?php echo $this->getCustomerId(); ?>', toStep, price, {orderId: orderId, currency: currency});
+                } catch(e) {
+                    console.log(e);
+                }
+
+                var updater = new Ajax.Updater('checkout-progress-wrapper', this.progressUrl, {
+                    method: 'get',
+                    onFailure: this.ajaxFailure.bind(this),
+                    parameters: toStep ? {toStep: toStep} : null
+                });
+            }
+        });
+        <?php endif;?>
+    </script>
+    <?php echo $this->getChildHtml(); ?>
+    <!-- Kirchbergerknorr_IntelliAd Section end -->
+<?php endif; ?>

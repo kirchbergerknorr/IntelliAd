@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="kk_intelliad/intelliAd" name="kk_intelliad" template="kirchbergerknorr/intelliad/intelliad.phtml" />
+        </reference>
+        <reference name="before_body_end">
+            <block type="kk_intelliad/intelliAd" name="kk_intelliad" template="kirchbergerknorr/intelliad/intelliad.phtml" />
+        </reference>
+    </default>
+</layout>

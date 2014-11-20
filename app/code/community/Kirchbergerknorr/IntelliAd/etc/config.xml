@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * IntelliAd Config
+ *
+ * @category    Kirchbergerknorr
+ * @package     Kirchbergerknorr_IntelliAd
+ * @author      Aleksey Razbakov <ar@kirchbergerknorr.de>
+ * @copyright   Copyright (c) 2014 kirchbergerknorr GmbH (http://www.kirchbergerknorr.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Kirchbergerknorr_IntelliAd>
+            <version>0.1.0</version>
+        </Kirchbergerknorr_IntelliAd>
+    </modules>
+    <global>
+        <models>
+            <kk_intelliad>
+                <class>Kirchbergerknorr_IntelliAd_Model</class>
+            </kk_intelliad>
+        </models>
+        <blocks>
+            <kk_intelliad>
+                <class>Kirchbergerknorr_IntelliAd_Block</class>
+            </kk_intelliad>
+        </blocks>
+        <helpers>
+            <kk_intelliad>
+                <class>Kirchbergerknorr_IntelliAd_Helper</class>
+            </kk_intelliad>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <kk_intelliad>
+                    <file>kk_intelliad.xml</file>
+                </kk_intelliad>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <kk_intelliad>
+                                            <title>Kirchbergerknorr IntelliAd Config Section</title>
+                                        </kk_intelliad>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>
