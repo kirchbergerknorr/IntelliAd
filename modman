@@ -1,0 +1,9 @@
+app/code/community/Kirchbergerknorr/IntelliAd/Block/IntelliAd.php app/code/community/Kirchbergerknorr/IntelliAd/Block/IntelliAd.php
+app/code/community/Kirchbergerknorr/IntelliAd/etc/config.xml app/code/community/Kirchbergerknorr/IntelliAd/etc/config.xml
+app/code/community/Kirchbergerknorr/IntelliAd/etc/system.xml app/code/community/Kirchbergerknorr/IntelliAd/etc/system.xml
+app/code/community/Kirchbergerknorr/IntelliAd/Helper/Data.php app/code/community/Kirchbergerknorr/IntelliAd/Helper/Data.php
+app/code/community/Kirchbergerknorr/IntelliAd/Model/System/Config/Source/Addto.php app/code/community/Kirchbergerknorr/IntelliAd/Model/System/Config/Source/Addto.php
+app/code/community/Kirchbergerknorr/IntelliAd/Model/System/Config/Source/Orderid.php app/code/community/Kirchbergerknorr/IntelliAd/Model/System/Config/Source/Orderid.php
+app/design/frontend/base/default/layout/kk_intelliad.xml app/design/frontend/base/default/layout/kk_intelliad.xml
+app/design/frontend/base/default/template/kirchbergerknorr/intelliad/intelliad.phtml app/design/frontend/base/default/template/kirchbergerknorr/intelliad/intelliad.phtml
+app/etc/modules/Kirchbergerknorr_IntelliAd.xml app/etc/modules/Kirchbergerknorr_IntelliAd.xml
