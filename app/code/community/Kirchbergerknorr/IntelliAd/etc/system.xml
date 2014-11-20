@@ -19,7 +19,7 @@
     </tabs>
     <sections>
         <kk_intelliad module="kk_intelliad">
-            <label>kirchbergerknorr IntelliAd</label>
+            <label>IntelliAd</label>
             <tab>kirchbergerknorr</tab>
             <sort_order>100</sort_order>
             <show_in_default>1</show_in_default>
