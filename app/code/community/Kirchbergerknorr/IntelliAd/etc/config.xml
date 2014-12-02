@@ -16,6 +16,20 @@
             <version>0.1.0</version>
         </Kirchbergerknorr_IntelliAd>
     </modules>
+    <default>
+        <kk_intelliad>
+            <general>
+                <enable>0</enable>
+                <aliases><![CDATA[cart:pageview_1,
+login:pageview_2,
+billing:pageview_3,
+shipping:pageview_3,
+payment: pageview_4,
+review: pageview_5,
+sale:sale]]></aliases>
+            </general>
+        </kk_intelliad>
+    </default>
     <global>
         <models>
             <kk_intelliad>

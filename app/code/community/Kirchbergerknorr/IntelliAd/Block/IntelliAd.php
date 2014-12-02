@@ -30,7 +30,7 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
     public function isSuccess()
     {
         $successPath = '/checkout/onepage/success';
-        if(Mage::getStoreConfigFlag('kk_intelliad/ecommerce/enable')
+        if(Mage::getStoreConfigFlag('kk_intelliad/general/enable')
             && strpos($this->getRequest()->getPathInfo(), $successPath) !== false){
                 return true;
         }
@@ -40,6 +40,15 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
     public function isCheckout()
     {
         $checkoutPath = '/checkout/onepage';
+        if(strpos($this->getRequest()->getPathInfo(), $checkoutPath) !== false){
+            return true;
+        }
+        return false;
+    }
+
+    public function isCart()
+    {
+        $checkoutPath = '/checkout/cart';
         if(strpos($this->getRequest()->getPathInfo(), $checkoutPath) !== false){
             return true;
         }
@@ -79,8 +88,23 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
 
     public function getLastOrderId()
     {
-        $sOrderId = Mage::getSingleton('checkout/session')->getLastOrderId();
-        $oOrder = Mage::getModel('sales/order')->load($sOrderId);
-        return $oOrder->getQuote()->getId();
+        $orderId = Mage::getSingleton('checkout/session')->getLastOrderId();
+        $order = Mage::getModel('sales/order')->load($orderId);
+        return $order->getQuoteId();
+    }
+
+    public function getSteps()
+    {
+        $conf = Mage::getStoreConfig('kk_intelliad/general/aliases');
+        $conf = str_replace("\n", "", $conf);
+        $result = array();
+        if ($conf) {
+            $options = explode(",", $conf);
+            foreach ($options as $option) {
+                list($name, $value) = explode(":", trim($option));
+                $result[$name] = $value;
+            }
+        }
+        return Mage::helper('core')->jsonEncode($result);
     }
 }

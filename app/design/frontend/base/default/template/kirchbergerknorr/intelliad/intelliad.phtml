@@ -38,17 +38,29 @@ if($this->isActive()): ?>
             return true;
         }
 
+        function kkIntelliaAdTracking(step, price) {
+            if (typeof price == 'undefined') {
+                price = 0;
+            }
+
+            try {
+                var orderId = '<?php echo $this->getOrderId(); ?>';
+                var currency = '<?php echo $this->getCurrency(); ?>';
+
+                var steps = <?php echo $this->getSteps(); ?>;
+
+                iapixel('<?php echo $this->getCustomerId(); ?>', steps[step], price, {orderId: orderId, currency: currency});
+            } catch(e) {
+                console.log(e);
+            }
+        }
+
         <?php if($this->isCheckout() && !$this->isSuccess() ): ?>
         Event.observe(window, 'load', function() {
+            kkIntelliaAdTracking('login');
+
             Checkout.prototype.reloadProgressBlock = function(toStep) {
-                try {
-                    var price = '<?php echo $this->getPrice(); ?>';
-                    var orderId = '<?php echo $this->getOrderId(); ?>';
-                    var currency = '<?php echo $this->getCurrency(); ?>';
-                    iapixel('<?php echo $this->getCustomerId(); ?>', toStep, price, {orderId: orderId, currency: currency});
-                } catch(e) {
-                    console.log(e);
-                }
+                kkIntelliaAdTracking(toStep);
 
                 var updater = new Ajax.Updater('checkout-progress-wrapper', this.progressUrl, {
                     method: 'get',
@@ -58,15 +70,11 @@ if($this->isActive()): ?>
             }
         });
         <?php endif;?>
+        <?php if($this->isCart()): ?>
+            kkIntelliaAdTracking('cart');
+        <?php endif;?>
         <?php if($this->isSuccess()): ?>
-            try {
-                var price = '<?php echo $this->getLastPrice(); ?>';
-                var orderId = '<?php echo $this->getLastOrderId(); ?>';
-                var currency = '<?php echo $this->getCurrency(); ?>';
-                iapixel('<?php echo $this->getCustomerId(); ?>', 'sale', price, {orderId: orderId, currency: currency});
-            } catch(e) {
-                console.log(e);
-            }
+            kkIntelliaAdTracking('sale', '<?php echo $this->getLastPrice(); ?>');
         <?php endif;?>
     </script>
     <?php echo $this->getChildHtml(); ?>
