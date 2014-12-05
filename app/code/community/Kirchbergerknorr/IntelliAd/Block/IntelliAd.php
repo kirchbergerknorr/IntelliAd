@@ -18,6 +18,11 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
         return Mage::getStoreConfig('kk_intelliad/general/customer_id');
     }
 
+    public function isPriceTrackingActive()
+    {
+        return Mage::getStoreConfig('kk_intelliad/general/price_tracking');
+    }
+
     public function isActive()
     {
         if(Mage::getStoreConfigFlag('kk_intelliad/general/enable')

@@ -27,6 +27,7 @@ shipping:pageview_3,
 payment: pageview_4,
 review: pageview_5,
 sale:sale]]></aliases>
+                <price_tracking>0</price_tracking>
             </general>
         </kk_intelliad>
     </default>

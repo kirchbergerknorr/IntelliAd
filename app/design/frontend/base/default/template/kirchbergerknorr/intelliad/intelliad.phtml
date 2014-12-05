@@ -13,7 +13,7 @@ if($this->isActive()): ?>
     <!-- Kirchbergerknorr_IntelliAd Section start -->
     <script type="text/javascript">
         function iapixel(cId, cvType, cvValue, opts) {
-            if (cId && cvType ) {
+            if (cId && cvType) {
                 var merge = function(d,s){ for(var p in s){ if(d.hasOwnProperty(p)){ d[p]=s[p]; } } return d; };
                 var options = merge({
                     currency: 'EUR',
@@ -57,10 +57,10 @@ if($this->isActive()): ?>
 
         <?php if($this->isCheckout() && !$this->isSuccess() ): ?>
         Event.observe(window, 'load', function() {
-            kkIntelliaAdTracking('login', '<?php echo $this->getPrice(); ?>');
+            kkIntelliaAdTracking('login', '<?php echo $this->isPriceTrackingActive()?$this->getPrice():0; ?>');
 
             Checkout.prototype.reloadProgressBlock = function(toStep) {
-                kkIntelliaAdTracking(toStep, '<?php echo $this->getPrice(); ?>');
+                kkIntelliaAdTracking(toStep, '<?php echo $this->isPriceTrackingActive()?$this->getPrice():0; ?>');
 
                 var updater = new Ajax.Updater('checkout-progress-wrapper', this.progressUrl, {
                     method: 'get',
@@ -71,7 +71,7 @@ if($this->isActive()): ?>
         });
         <?php endif;?>
         <?php if($this->isCart()): ?>
-            kkIntelliaAdTracking('cart', '<?php echo $this->getPrice(); ?>');
+            kkIntelliaAdTracking('cart', '<?php echo $this->isPriceTrackingActive()?$this->getPrice():0; ?>');
         <?php endif;?>
         <?php if($this->isSuccess()): ?>
             kkIntelliaAdTracking('sale', '<?php echo $this->getLastPrice(); ?>');
