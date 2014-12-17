@@ -1,7 +1,7 @@
-Kirchbergerknorr IntelliAd
-==========================
+Kirchbergerknorr IntelliAd Magento Module
+=========================================
 
-IntelliAd module is designed to add IntelliAd tracking to Checkout Page.
+IntelliAd module is designed to add IntelliAd tracking to Magento Checkout Page.
 
 Installation
 ------------
