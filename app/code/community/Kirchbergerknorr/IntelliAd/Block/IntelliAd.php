@@ -71,7 +71,11 @@ class Kirchbergerknorr_IntelliAd_Block_IntelliAd extends Mage_Core_Block_Templat
 
     public function getOrderId()
     {
-        return $this->getQuote()->getId();
+        if ($this->isSuccess()) {
+            return $this->getLastOrderId();
+        } else {
+            return $this->getQuote()->getId();
+        }
     }
 
     public function getPrice()
